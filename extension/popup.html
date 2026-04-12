@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fake News Detector</h2>
+    <p id="result">Checking...</p>
+
+    <script>
+        fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: document.title })
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("result").innerText = data.result;
+        });
+    </script>
+</body>
+</html>
